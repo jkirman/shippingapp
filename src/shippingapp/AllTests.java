@@ -132,45 +132,9 @@ public class AllTests {
 		
 	}
 	
+	// TODO write this test
 	@Test
 	public void testCalculateRate() {
-		
-		// Prices for different weights in increasing order of weight
-		double[][] prices = {
-				{0.85, 1.2, 1.8, 2.95, 4.1, 4.7, 5.05}, // Canada
-				{1.2, 1.8, 2.95, 5.15, 10.3, 10.3, 10.3}, // US
-				{2.5, 3.6, 5.9, 10.3, 20.6, 20.6, 20.6} // Itn'l
-				};
-		double[][] testWeights = {{3, 30}, {31, 50}, {51, 100}, {101, 200}, {201, 300}, {301, 400}, {401, 500}};
-		
-		double currentPrice;
-		
-		// Test Canadian rates
-		for (int i = 0; i < testWeights.length; i++) {
-			for (int j = 0; j < testWeights[i].length; j++) {
-				currentPrice = s.calculateRateByWeight(testWeights[i][j], Destination.CAN);
-				assertEquals("Canadian weight " + testWeights[i][j] + " does not match to right price.",
-						prices[1][i], currentPrice, 0);
-			}
-		}
-		
-		// Test US rates
-		for (int i = 0; i < testWeights.length; i++) {
-			for (int j = 0; j < testWeights[i].length; j++) {
-				currentPrice = s.calculateRateByWeight(testWeights[i][j], Destination.USA);
-				assertEquals("US weight " + testWeights[i][j] + " does not match to right price.",
-						prices[2][i], currentPrice, 0);
-			}
-		}
-		
-		// Test Itn'l rates
-		for (int i = 0; i < testWeights.length; i++) {
-			for (int j = 0; j < testWeights[i].length; j++) {
-				currentPrice = s.calculateRateByWeight(testWeights[i][j], Destination.ITL);
-				assertEquals("International weight " + testWeights[i][j] + " does not match to right price.",
-						prices[3][i], currentPrice, 0);
-			}
-		}
 		
 	}
 	
