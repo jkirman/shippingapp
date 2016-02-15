@@ -22,7 +22,7 @@ public class Shipper {
 	 * @param destination
 	 * @return True if all inputs have been entered, false otherwise
 	 */
-	public boolean checkInputs(String length, String width, String depth, String weight, Destination destination) throws Exception {
+	public void checkInputs(String length, String width, String depth, String weight, Destination destination) throws Exception {
 		throw new Exception("Not implemented");
 	}
 	
@@ -31,7 +31,7 @@ public class Shipper {
 	 * @param dimensions An array containing the dimensions of the package: (width, height, depth)
 	 * @return True if the size is an allowable size, false otherwise
 	 */
-	public boolean checkSize(double[] dimensions) throws Exception {
+	public void checkSize(double[] dimensions) throws Exception {
 		throw new Exception("Not implemented");
 	}
 	
@@ -40,7 +40,8 @@ public class Shipper {
 	 * @param weight The weight of the package
 	 * @return True if the weight is an allowable weight, false otherwise
 	 */
-	public boolean checkWeight(double weight) throws Exception {
+	public void checkWeight(double weight) throws Exception {
+		
 		throw new Exception("Not implemented");
 	}
 	
