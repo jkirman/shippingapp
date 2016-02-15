@@ -38,12 +38,21 @@ public class AllTests {
 		
 		// Test valid inputs
 		for (int i = 0; i < validInputSt.length; i++) {
-			assertEquals(true, s.checkInputs(validInputSt[i][0], validInputSt[i][1], validInputSt[i][2], validInputSt[i][3], validInputDe[i]));
+			try {
+				assertEquals(true, s.checkInputs(validInputSt[i][0], validInputSt[i][1], validInputSt[i][2], validInputSt[i][3], validInputDe[i]));
+			} catch (Exception e) {
+				throw new AssertionError(e.getMessage());
+			}
+			
 		}
 		
 		// Test invalid inputs
 		for (int i = 0; i < invalidInputSt.length; i++) {
-			assertEquals(false, s.checkInputs(invalidInputSt[i][0], invalidInputSt[i][1], invalidInputSt[i][2], invalidInputSt[i][3], invalidInputDe[i]));
+			try {			
+				assertEquals(false, s.checkInputs(invalidInputSt[i][0], invalidInputSt[i][1], invalidInputSt[i][2], invalidInputSt[i][3], invalidInputDe[i]));
+			} catch (Exception e) {
+				throw new AssertionError(e.getMessage());
+			}
 		}
 		
 	}
@@ -65,12 +74,20 @@ public class AllTests {
 		
 		// Test valid dimensions
 		for (int i = 0; i < validDimensions.length; i++) {
-			assertEquals(true, s.checkSize(validDimensions[i]));
+			try {
+				assertEquals(true, s.checkSize(validDimensions[i]));
+			} catch (Exception e) {
+				throw new AssertionError(e.getMessage());
+			}
 		}
 		
 		// Test invalid dimensions
 		for (int i = 0; i < invalidDimensions.length; i++) {
-			assertEquals(false, s.checkSize(invalidDimensions[i]));
+			try {
+				assertEquals(false, s.checkSize(invalidDimensions[i]));
+			} catch (Exception e) {
+				throw new AssertionError(e.getMessage());
+			}
 		}
 	}
 	
@@ -81,12 +98,20 @@ public class AllTests {
 		
 		// Test valid weights
 		for (int i = 0; i < validWeights.length; i++) {
-			assertEquals(true, s.checkWeight(validWeights[i]));
+			try {
+				assertEquals(true, s.checkWeight(validWeights[i]));
+			} catch (Exception e) {
+				throw new AssertionError(e.getMessage());
+			}
 		}
 		
 		// Test invalid weights
 		for (int i = 0; i < invalidWeights.length; i++) {
-			assertEquals(false, s.checkWeight(invalidWeights[i]));
+			try {
+				assertEquals(false, s.checkWeight(invalidWeights[i]));
+			} catch (Exception e) {
+				throw new AssertionError(e.getMessage());
+			}
 		}
 	}
 	
@@ -106,7 +131,11 @@ public class AllTests {
 		// Test Canadian rates
 		for (int i = 0; i < testWeights.length; i++) {
 			for (int j = 0; j < testWeights[i].length; j++) {
-				currentPrice = s.calculateRateByWeight(testWeights[i][j], Destination.CAN);
+				try {
+					currentPrice = s.calculateRateByWeight(testWeights[i][j], Destination.CAN);
+				} catch (Exception e) {
+					throw new AssertionError(e.getMessage());
+				}
 				assertEquals("Canadian weight " + testWeights[i][j] + " does not match to right price.",
 						prices[1][i], currentPrice, 0);
 			}
@@ -115,7 +144,11 @@ public class AllTests {
 		// Test US rates
 		for (int i = 0; i < testWeights.length; i++) {
 			for (int j = 0; j < testWeights[i].length; j++) {
-				currentPrice = s.calculateRateByWeight(testWeights[i][j], Destination.USA);
+				try {
+					currentPrice = s.calculateRateByWeight(testWeights[i][j], Destination.USA);
+				} catch (Exception e) {
+					throw new AssertionError(e.getMessage());
+				}
 				assertEquals("US weight " + testWeights[i][j] + " does not match to right price.",
 						prices[2][i], currentPrice, 0);
 			}
@@ -124,7 +157,11 @@ public class AllTests {
 		// Test Itn'l rates
 		for (int i = 0; i < testWeights.length; i++) {
 			for (int j = 0; j < testWeights[i].length; j++) {
-				currentPrice = s.calculateRateByWeight(testWeights[i][j], Destination.ITL);
+				try {
+					currentPrice = s.calculateRateByWeight(testWeights[i][j], Destination.ITL);
+				} catch (Exception e) {
+					throw new AssertionError(e.getMessage());
+				}
 				assertEquals("International weight " + testWeights[i][j] + " does not match to right price.",
 						prices[3][i], currentPrice, 0);
 			}
@@ -140,7 +177,11 @@ public class AllTests {
 		double[] result = {0.85, 1.2, 1.2, 4.1, 5.05};
 
 		for (int i = 0; i < validTestsSt.length; i++) {
-			assertEquals(result[i], s.checkInputs(validTestsSt[i][0], validTestsSt[i][1], validTestsSt[i][2], validTestsSt[i][3], dest));
+			try {
+				assertEquals(result[i], s.checkInputs(validTestsSt[i][0], validTestsSt[i][1], validTestsSt[i][2], validTestsSt[i][3], dest));
+			} catch (Exception e) {
+				throw new AssertionError(e.getMessage());
+			}
 		}
 		
 	}
@@ -154,7 +195,11 @@ public class AllTests {
 				{"150", "100", "10", ""}, {"150", "100", "5", "ten"}, {"", "100", "5", "10"}, {"150", "", "5", "10"}};
 		
 		for (int i = 0; i < invalidTestsSt.length; i++) {
-			assertEquals(null, s.checkInputs(invalidTestsSt[i][0], invalidTestsSt[i][1], invalidTestsSt[i][2], invalidTestsSt[i][3], dest));
+			try {
+				s.checkInputs(invalidTestsSt[i][0], invalidTestsSt[i][1], invalidTestsSt[i][2], invalidTestsSt[i][3], dest);
+			} catch (Exception e) {
+				throw new AssertionError(e.getMessage());
+			}
 		}
 		
 	}
