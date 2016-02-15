@@ -132,9 +132,30 @@ public class AllTests {
 		
 	}
 	
-	// TODO write this test
 	@Test
-	public void testCalculateRate() {
+	public void testValidCalculateRate() {
+		
+		Destination dest = Destination.CAN;
+		String[][] validTestsSt = {{"150", "100", "5", "10"}, {"150", "100", "5", "30"}, {"250", "200", "12", "250"}, {"250", "200", "12", "400"}};
+		double[] result = {0.85, 1.2, 1.2, 4.1, 5.05};
+
+		for (int i = 0; i < validTestsSt.length; i++) {
+			assertEquals(result[i], s.checkInputs(validTestsSt[i][0], validTestsSt[i][1], validTestsSt[i][2], validTestsSt[i][3], dest));
+		}
+		
+	}
+	
+	@Test
+	public void testInvalidCalculateRate() {
+		Destination dest = Destination.CAN;
+		String[][] invalidTestsSt = {{"100", "100", "5", "5"}, {"150", "80", "5", "5"},
+				{"150", "100", "0", "5"}, {"150", "100", "1", "2"}, {"400", "200", "10", "10"},
+				{"300", "300", "5", "5"}, {"250", "250", "25", "10"}, {"380", "270", "20", "550"},
+				{"150", "100", "10", ""}, {"150", "100", "5", "ten"}, {"", "100", "5", "10"}, {"150", "", "5", "10"}};
+		
+		for (int i = 0; i < invalidTestsSt.length; i++) {
+			assertEquals(null, s.checkInputs(invalidTestsSt[i][0], invalidTestsSt[i][1], invalidTestsSt[i][2], invalidTestsSt[i][3], dest));
+		}
 		
 	}
 	
