@@ -7,12 +7,25 @@ package shippingapp;
 public class Shipper {
 	
 	Exception InvalidSizeError = new Exception();
-	public enum Destination{ CAN, USA, ITL };
+	public static enum Destination{ CAN, USA, ITL };
 	
 	/**
 	 * Constructor
 	 */
 	public Shipper() {}
+	
+	/**
+	 * Checks to see if any inputs are missing from the submission
+	 * @param length
+	 * @param width
+	 * @param depth
+	 * @param weight
+	 * @param destination
+	 * @return True if all inputs have been entered, false otherwise
+	 */
+	public boolean checkInputs(String length, String width, String depth, String weight, Destination destination) {
+		return false;
+	}
 	
 	/**
 	 * Checks if the size of the entered package is an allowable size for shipment
@@ -33,34 +46,25 @@ public class Shipper {
 	}
 	
 	/**
-	 * Parses a string and converts it to a region identifier
-	 * @param destination String of the name of the country/region destination (Canada, USA, or International)
-	 * @return A Destination enumeration that identifies the region
+	 * Calculates the rate for which the package is shipped based on its weight
+	 * @param weight
+	 * @param dest
+	 * @return The calculated rate of the shipment
 	 */
-	public Destination parseDestination(String destination) {
-		return null;
+	public double calculateRateByWeight(double weight, Destination dest) {
+		return 0;
 	}
 	
 	/**
-	 * Checks to see if any inputs are missing from the submission
+	 * Takes in the raw input and subsequently calculates the rate to ship
 	 * @param length
 	 * @param width
 	 * @param depth
 	 * @param weight
 	 * @param destination
-	 * @return True if all inputs have been entered, false otherwise
-	 */
-	public boolean checkInputs(String length, String width, String depth, String weight, String destination) {
-		return false;
-	}
-	
-	/**
-	 * Calculates the rate for which the package is shipped
-	 * @param weight
-	 * @param dest
 	 * @return The calculated rate of the shipment
 	 */
-	public double calculateRate(double weight, Destination dest) {
+	public double calculateRate(String length, String width, String depth, String weight, Destination destination) {
 		return 0;
 	}
 	
