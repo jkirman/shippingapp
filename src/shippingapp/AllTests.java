@@ -2,6 +2,8 @@ package shippingapp;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +19,7 @@ public class AllTests {
 	}
 	
 	@Test
-	public void testCheckInputs() {
+	public void testCheckInputs(){
 		String[][] validInputSt = {{"12", "41", "23.5", "1244.0"}};
 		Destination[] validInputDe = { Destination.CAN };
 		
@@ -50,7 +52,8 @@ public class AllTests {
 		for (int i = 0; i < invalidInputSt.length; i++) {
 			try {			
 				s.checkInputs(invalidInputSt[i][0], invalidInputSt[i][1], invalidInputSt[i][2], invalidInputSt[i][3], invalidInputDe[i]);
-			} catch (Exception e) {
+				throw new AssertionError("Exception expected for invalid inputs: " + Arrays.toString(invalidInputSt[i]) + ", " + invalidInputDe[i].toString());
+			} catch (ShippingException e) {} catch (Exception e) {
 				throw new AssertionError(e.getMessage());
 			}
 		}
@@ -85,7 +88,8 @@ public class AllTests {
 		for (int i = 0; i < invalidDimensions.length; i++) {
 			try {
 				s.checkSize(invalidDimensions[i]);
-			} catch (Exception e) {
+				throw new AssertionError("Exception expected for invalid inputs: " + Arrays.toString(invalidDimensions[i]));
+			} catch (ShippingException e) {} catch (Exception e) {
 				throw new AssertionError(e.getMessage());
 			}
 		}
@@ -93,7 +97,7 @@ public class AllTests {
 	
 	@Test
 	public void testCheckWeight() {
-		double[] validWeights = {5, 10, 500};
+		double[] validWeights = {3, 10, 500};
 		double[] invalidWeights = {0, 550};
 		
 		// Test valid weights
@@ -109,7 +113,8 @@ public class AllTests {
 		for (int i = 0; i < invalidWeights.length; i++) {
 			try {
 				s.checkWeight(invalidWeights[i]);
-			} catch (Exception e) {
+				throw new AssertionError("Exception expected for invalid inputs: " + invalidWeights[i]);
+			} catch (ShippingException e) {} catch (Exception e) {
 				throw new AssertionError(e.getMessage());
 			}
 		}
@@ -197,7 +202,8 @@ public class AllTests {
 		for (int i = 0; i < invalidTestsSt.length; i++) {
 			try {
 				s.calculateRate(invalidTestsSt[i][0], invalidTestsSt[i][1], invalidTestsSt[i][2], invalidTestsSt[i][3], dest);
-			} catch (Exception e) {
+				throw new AssertionError("Exception expected for invalid inputs: " + Arrays.toString(invalidTestsSt[i]) + ", " + dest.toString());
+			} catch (ShippingException e) {} catch (Exception e) {
 				throw new AssertionError(e.getMessage());
 			}
 		}

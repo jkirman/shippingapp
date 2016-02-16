@@ -41,8 +41,9 @@ public class Shipper {
 	 * @return True if the weight is an allowable weight, false otherwise
 	 */
 	public void checkWeight(double weight) throws Exception {
-		
-		throw new Exception("Not implemented");
+		if (weight < 3 || weight > 500) {
+			throw new Exception("Not implemented");
+		}
 	}
 	
 	/**
