@@ -23,7 +23,19 @@ public class Shipper {
 	 * @return True if all inputs have been entered, false otherwise
 	 */
 	public void checkInputs(String length, String width, String depth, String weight, Destination destination) throws Exception {
-		throw new Exception("Not implemented");
+		try {
+			Double.parseDouble(length);
+		} catch (Exception e) { throw new ShippingException("Invalid length: " + length); }
+		try {
+			Double.parseDouble(width);
+		} catch (Exception e) { throw new ShippingException("Invalid width: " + width); }
+		try {
+			Double.parseDouble(depth);
+		} catch (Exception e) { throw new ShippingException("Invalid width: " + depth); }
+		try {
+			Double.parseDouble(weight);
+		} catch (Exception e) { throw new ShippingException("Invalid width: " + weight); }
+		if (destination == null) {throw new ShippingException("No destination.");}
 	}
 	
 	/**
@@ -32,7 +44,13 @@ public class Shipper {
 	 * @return True if the size is an allowable size, false otherwise
 	 */
 	public void checkSize(double[] dimensions) throws Exception {
-		throw new Exception("Not implemented");
+		if (dimensions[0] < 140 || dimensions[0] > 380) {
+			throw new ShippingException("Invalid length.");
+		} else if (dimensions[1] < 90 || dimensions[1] > 270) {
+			throw new ShippingException("Invalid width.");
+		} else if (dimensions[2] < 1 || dimensions[2] > 20) {
+			throw new ShippingException("Invalid depth.");
+		}
 	}
 	
 	/**
@@ -42,7 +60,7 @@ public class Shipper {
 	 */
 	public void checkWeight(double weight) throws Exception {
 		if (weight < 3 || weight > 500) {
-			throw new Exception("Not implemented");
+			throw new ShippingException("Weight invalid.");
 		}
 	}
 	
@@ -53,7 +71,28 @@ public class Shipper {
 	 * @return The calculated rate of the shipment
 	 */
 	public double calculateRateByWeight(double weight, Destination dest) throws Exception {
-		throw new Exception("Not implemented");
+		if (dest == Destination.CAN) {
+			if (weight >= 3 && weight <= 30) { return 0.85; }
+			else if (weight >= 31 && weight <= 50) { return 1.2; }
+			else if (weight >= 51 && weight <= 100) { return 1.8; }
+			else if (weight >= 101 && weight <= 200) { return 2.95; }
+			else if (weight >= 201 && weight <= 300) { return 4.1; }
+			else if (weight >= 301 && weight <= 400) { return 4.7; }
+			else if (weight >= 401 && weight <= 500) { return 5.05; }
+		} else if (dest == Destination.USA) {
+			if (weight >= 3 && weight <= 30) { return 1.2; }
+			else if (weight >= 31 && weight <= 50) { return 1.8; }
+			else if (weight >= 51 && weight <= 100) { return 2.95; }
+			else if (weight >= 101 && weight <= 200) { return 5.15; }
+			else if (weight >= 201 && weight <= 500) { return 10.3; }
+		} else if (dest == Destination.ITL) {
+			if (weight >= 3 && weight <= 30) { return 2.5; }
+			else if (weight >= 31 && weight <= 50) { return 3.6; }
+			else if (weight >= 51 && weight <= 100) { return 5.9; }
+			else if (weight >= 101 && weight <= 200) { return 10.3; }
+			else if (weight >= 201 && weight <= 500) { return 20.6; }
+		}
+		throw new ShippingException("Invalid data");
 	}
 	
 	/**
@@ -66,7 +105,10 @@ public class Shipper {
 	 * @return The calculated rate of the shipment
 	 */
 	public double calculateRate(String length, String width, String depth, String weight, Destination destination) throws Exception {
-		throw new Exception("Not implemented");
+		this.checkInputs(length, width, depth, weight, destination);
+		this.checkSize(new double[] {Double.parseDouble(length), Double.parseDouble(width), Double.parseDouble(depth)});
+		this.checkWeight(Double.parseDouble(weight));
+		return this.calculateRateByWeight(Double.parseDouble(weight), destination);
 	}
 	
 }

@@ -65,7 +65,7 @@ public class AllTests {
 		
 		double[][] validDimensions = {
 				{150, 100, 5},
-				{250, 200, 12}};
+				{250, 200, 20}};
 		
 		double[][] invalidDimensions = {
 				{100, 100, 5},
@@ -142,7 +142,7 @@ public class AllTests {
 					throw new AssertionError(e.getMessage());
 				}
 				assertEquals("Canadian weight " + testWeights[i][j] + " does not match to right price.",
-						prices[1][i], currentPrice, 0);
+						prices[0][i], currentPrice, 0);
 			}
 		}
 		
@@ -155,7 +155,7 @@ public class AllTests {
 					throw new AssertionError(e.getMessage());
 				}
 				assertEquals("US weight " + testWeights[i][j] + " does not match to right price.",
-						prices[2][i], currentPrice, 0);
+						prices[1][i], currentPrice, 0);
 			}
 		}
 		
@@ -168,7 +168,7 @@ public class AllTests {
 					throw new AssertionError(e.getMessage());
 				}
 				assertEquals("International weight " + testWeights[i][j] + " does not match to right price.",
-						prices[3][i], currentPrice, 0);
+						prices[2][i], currentPrice, 0);
 			}
 		}
 		
@@ -178,12 +178,12 @@ public class AllTests {
 	public void testValidCalculateRate() {
 		
 		Destination dest = Destination.CAN;
-		String[][] validTestsSt = {{"150", "100", "5", "10"}, {"150", "100", "5", "30"}, {"250", "200", "12", "250"}, {"250", "200", "12", "400"}};
-		double[] result = {0.85, 1.2, 1.2, 4.1, 5.05};
+		String[][] validTestsSt = {{"150", "100", "5", "10"}, {"150", "100", "5", "40"}, {"250", "200", "12", "250"}, {"250", "200", "12", "500"}};
+		double[] result = {0.85, 1.2, 4.1, 5.05};
 
 		for (int i = 0; i < validTestsSt.length; i++) {
 			try {
-				assertEquals("Wrong value." ,result[i], s.calculateRate(validTestsSt[i][0], validTestsSt[i][1], validTestsSt[i][2], validTestsSt[i][3], dest), 0);
+				assertEquals("Wrong value.", result[i], s.calculateRate(validTestsSt[i][0], validTestsSt[i][1], validTestsSt[i][2], validTestsSt[i][3], dest), 0);
 			} catch (Exception e) {
 				throw new AssertionError(e.getMessage());
 			}
